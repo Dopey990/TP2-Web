@@ -1,0 +1,151 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% block title %}<title>CyberBlog 2077</title>{% endblock %}
+
+<body data-spy="scroll" data-target="#navbar-example">
+    <main id="main">
+    <!-- ======= Blog Header ======= -->
+    <div class="header-bg page-area">
+      <div class="home-overly"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="slider-content text-center">
+              <div class="header-bottom">
+                <div class="layer2 wow zoomIn" data-wow-duration="1s" data-wow-delay=".4s">
+                  <h1 class="title2">CyberBlog 2077</h1>
+                </div>
+                <div class="layer3 wow zoomInUp" data-wow-duration="2s" data-wow-delay="1s">
+                  <h2 class="title3">Par Thomas RIBAUT</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- End Blog Header -->
+	
+	
+	    <!-- ======= Blog Page ======= -->
+    <div class="blog-page area-padding">
+      <div class="container" style="margin-left: 100px; margin-right: 100px;">
+        <div class="row">
+          <div class="col-lg-4 col-md-4">
+            <div class="page-head-blog">
+              <div class="single-blog-page">
+                <!-- recent start -->
+                <div class="left-blog">
+                  <h4>Articles récents</h4>
+                  <div class="recent-post">
+                    <!-- start single post -->
+					{% for article in articles|reverse|slice(0, 4) %}
+						<div class="recent-single-post">
+						  <div class="post-img">
+							<a href="{{ path('article_show', {'id': article.id}) }}">
+								<img src="{{ asset('uploads/articles/' ~ article.imageFilename) }}" alt=""></img>
+							</a>
+						  </div>
+						  <div class="pst-content">
+							<p><a href="{{ path('article_show', {'id': article.id}) }}"> {{ article.Description }}</a></p>
+						  </div>
+						</div>
+					{% else %}
+						<p> Pas d'article présent</p>
+					{% endfor %}
+                </div>
+                <!-- recent end -->
+              </div>
+              <div class="single-blog-page">
+                <div class="left-blog">
+                  <h4>Catégories</h4>
+                  <ul>
+                    <li>
+                      <a href="{{ path('blog', {'categorie': 'Cyberpunk 2077'}) }}">Cyberpunk 2077</a>
+                    </li>
+                    <li>
+                      <a href="{{ path('blog', {'categorie': 'Johnny Silverhand'}) }}">Johnny Silverhand</a>
+                    </li>
+                    <li>
+                      <a href="{{ path('blog', {'categorie': 'Judy'}) }}">Judy</a>
+                    </li>
+                    <li>
+                      <a href="{{ path('blog', {'categorie': 'Jeu de l'année'}) }}">Jeu de l'année</a>
+                    </li>
+                    <li>
+                      <a href="{{ path('blog', {'categorie': 'Panam'}) }}">Panam</a>
+                    </li>
+                    <li>
+                      <a href="{{ path('blog', {'categorie': 'Keanu Reeves'}) }}">Keanu Reeves</a>
+                    </li>
+                    <li>
+                      <a href="{{ path('blog', {'categorie': 'MVP'}) }}">MVP</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+		</div>
+          <!-- End left sidebar -->
+			  <div class="col-md-8 col-sm-8 col-xs-12">
+			  {% for article in articles %}
+				  <!-- Start single blog -->
+					<div class="row">
+					  <div class="finBlog">
+						<div class="single-blog">
+						  <div class="post-thumbnail">
+							<a href="{{ path('article_show', {'id': article.id}) }}">
+								<img src="{{ asset('uploads/articles/' ~ article.imageFilename) }}" alt=""></img>
+							</a>
+						  </div>
+						  <div class="blog-meta">
+							<!-- 
+							<span class="comments-type">
+							  <i class="fa fa-comment-o"></i>
+							  <a href="#">11 comments</a>
+							</span>
+							-->
+						    <span class="author-meta"><i class="fa fa-user"></i>
+								{% for auteur in article.auteurs %}
+									{{ auteur }},
+								{% else %}
+									Auteur anonyme.
+								{% endfor %}
+							</span>
+							<span class="categories-meta"><i class="fa fa-tags"></i>
+								{% for categorie in article.categories %}
+									<a href="{{ path('blog', {'categorie': categorie}) }}">{{ categorie }} </a>,
+								{% else %}
+									<a>Sans catégorie.</a>
+								{% endfor %}
+							</span>
+							<span class="date-type"><i class="fa fa-calendar"></i>{{ article.DateCreation ? article.DateCreation|date('d/m/Y') : '' }}</span>
+						  </div>
+						  <div class="blog-text">
+							<h4>
+							  <a href="{{ asset('uploads/articles/' ~ article.imageFilename) }}">{{ article.Nom }}</a>
+							</h4>
+							<p>{{ article.Description }}</p>
+						  </div>
+						  <span>
+							<a href="{{ path('article_show', {'id': article.id}) }}" class="ready-btn">Lire plus</a>
+						  </span>
+						</div>
+					  </div>
+					  <!-- End single blog -->
+				{% else %}
+					<p> Pas encore d'article disponible. </p>
+				{% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- End Blog Page -->
+
+  </main><!-- End #main -->
+	
+	
+{% endblock %}
+
+

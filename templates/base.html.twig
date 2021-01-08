@@ -1,0 +1,108 @@
+{# templates/base.html.twig #}
+<!DOCTYPE html>
+<html>
+{% block stylesheets %}
+  <head>
+    <meta charset="UTF-8" />
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta content="" name="description">
+	<meta content="" name="keywords">
+
+	<!-- Favicons -->
+	<link href="/assets/img/favicon.ico" rel="icon">
+	<link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700|Raleway:300,400,400i,500,500i,700,800,900" rel="stylesheet">
+
+	<!-- Vendor CSS Files -->
+	<link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+	<link href="/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+	<link href="/assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+	<link href="/assets/vendor/nivo-slider/css/nivo-slider.css" rel="stylesheet">
+	<link href="/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+	<link href="/assets/vendor/venobox/venobox.css" rel="stylesheet">
+
+	<!-- Template Main CSS File -->
+	<link href="{{ asset('/assets/css/style.css') }}" rel="stylesheet">
+
+	<!-- =======================================================
+	* Template Name: eBusiness - v3.0.0
+	* Template URL: https://bootstrapmade.com/ebusiness-bootstrap-corporate-template/
+	* Author: BootstrapMade.com
+	* License: https://bootstrapmade.com/license/
+	======================================================== -->
+	</head>
+{% endblock %}
+	<body data-spy="scroll" data-target="#navbar-example">
+		<header id="header" class="fixed-top">
+			<div class="container d-flex justify-content-between">
+
+			  <div class="logo">
+				<h1 class="text-light"><a href="{{ path('blog') }}"><span>Acc</span>ueil</a></h1>
+			  </div>
+
+			  <nav class="nav-menu d-none d-lg-block">
+				<ul>
+				{% if app.user %}
+					<li><a class="admin" href="{{ path('article_index') }}">Administration</a></li>
+					<li><a href="{{ path('app_logout') }}">Logout</a></li>
+				{% else %}
+					<li><a href="{{ path('app_login') }}">Login</a></li>
+					<li><a href="{{ path('registration') }}">Register</a></li>
+				{% endif %}
+				</ul>
+			  </nav><!-- .nav-menu -->
+
+			</div>
+		</header><!-- End Header -->
+
+	</body>
+	{% block body %}{% endblock %} {% block javascripts %}{% endblock %}
+	{% block footer %}
+	<div class="footer-area-bottom">
+		  <div class="container">
+			<div class="row">
+			  <div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="copyright text-center">
+				  <p>
+					&copy; Copyright <strong>eBusiness</strong>. All Rights Reserved
+				  </p>
+				</div>
+				<div class="credits">
+				  <!--
+				  All the links in the footer should remain intact.
+				  You can delete the links only if you purchased the pro version.
+				  Licensing information: https://bootstrapmade.com/license/
+				  Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=eBusiness
+				-->
+				  Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		</div>
+	  </footer><!-- End  Footer -->
+
+	  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+	  <div id="preloader"></div>
+
+	  <!-- Vendor JS Files -->
+	  <script src="/assets/vendor/jquery/jquery.min.js"></script>
+	  <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	  <script src="/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+	  <script src="/assets/vendor/php-email-form/validate.js"></script>
+	  <script src="/assets/vendor/appear/jquery.appear.js"></script>
+	  <script src="/assets/vendor/knob/jquery.knob.js"></script>
+	  <script src="/assets/vendor/parallax/parallax.js"></script>
+	  <script src="/assets/vendor/wow/wow.min.js"></script>
+	  <script src="/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+	  <script src="/assets/vendor/nivo-slider/js/jquery.nivo.slider.js"></script>
+	  <script src="/assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+	  <script src="/assets/vendor/venobox/venobox.min.js"></script>
+
+	  <!-- Template Main JS File -->
+	  <script src="/assets/js/main.js"></script>
+	{% endblock %}
+</html>

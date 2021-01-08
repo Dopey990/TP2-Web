@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% block title %}<title>CyberArticle - {{ article.nom }}</title>{% endblock %}
+
+<body data-spy="scroll" data-target="#navbar-example">
+
+	<main id="main">
+		<!-- ======= Blog Header ======= -->
+		<div class="header-bg-blog page-area">
+		  <div class="home-overly"></div>
+		  <div class="container">
+			<div class="row">
+			  <div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="slider-content text-center">
+				  <div class="header-bottom">
+					<div class="layer2 wow zoomIn" data-wow-duration="1s" data-wow-delay=".4s">
+					  <h1 class="title2">{{ article.nom }}</h1>
+					</div>
+					<div class="layer3 wow zoomInUp" data-wow-duration="2s" data-wow-delay="1s">
+					  <h2 class="title3">Par article.auteur (bientôt)</h2>
+					</div>
+				  </div>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		</div><!-- End Blog Header -->
+
+	<div class="blog-page area-padding">
+      <div class="container">
+        <div class="row">
+		  <!-- Start single blog -->
+          <div class="col-md-8 col-sm-8 col-xs-12" id="blogPrincipal">
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <!-- single-blog start -->
+                <article class="blog-post-wrapper">
+                  <div class="post-thumbnail">
+                    <img src="{{ asset('uploads/articles/' ~ article.imageFilename) }}" alt="" />
+                  </div>
+                  <div class="post-information">
+                    <h1>{{ article.Nom }}</h1>
+                    <div class="entry-meta">
+                      <span class="author-meta"><i class="fa fa-user"></i>
+						{% for auteur in article.auteurs %}
+							{{ auteur }},
+						{% else %}
+							Auteur anonyme.
+						{% endfor %}
+					  </span>
+                      <span class="date-meta"><i class="fa fa-clock-o"></i>{{ article.DateCreation ? article.DateCreation|date('d/m/Y') : '' }}</span>
+                      <span class="categories-meta"><i class="fa fa-tags"></i>
+						{% for categorie in article.categories %}
+							<a href="{{ path('blog', {'categorie': categorie}) }}">{{ categorie }} </a>,
+						{% else %}
+							<a>Sans catégorie.</a>
+						{% endfor %}
+                      </span>
+                    </div>
+                    <div class="entry-content">
+                      <blockquote>
+                        <p>{{ article.Description }}</p>
+                      </blockquote>
+                      <p class="contenu-meta">{{ article.Contenu }}</p>
+                    </div>
+                  </div>
+                </article>
+                <!-- single-blog end -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- End Blog Page -->
+		
+	<div class="single-blog" id="btnAdmin">
+
+	{% if app.user %}
+		<span>
+			<a href="{{ path('article_index') }}" class="ready-btn">Retour à l'administration</a>
+		</span>	
+		<span>
+			<a href="{{ path('article_edit', {'id': article.id}) }}" class="ready-btn">Édition</a>
+		</span>
+	{% endif %}
+		<span>
+			<a href="{{ path('blog') }}" class="ready-btn">Accueil</a>
+		</span>
+
+	{% if is_granted('ROLE_ADMIN') %}
+		<span>
+			{{ include('article/_delete_form.html.twig') }}
+		</span>
+	{% endif %}
+
+	</div>
+
+</main>
+	
+</body>
+{% endblock %}

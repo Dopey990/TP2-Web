@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Article{% endblock %}
+
+{% block body %}
+    <h1>Create new Article</h1>
+
+    
+{{ form_start(form) }}
+	<ul id="categories-fields-list"
+        data-prototype="{{ form_widget(form.categories.vars.prototype)|e }}"
+        data-widget-tags="{{ '<li></li>'|e }}"
+        data-widget-counter="{{ form.categories|length }}">
+    {% for categorie in form.categories %}
+        <li>
+            {{ form_errors(categorie) }}
+            {{ form_widget(categorie) }}
+        </li>
+    {% endfor %}
+    </ul>
+
+    <button type="button"
+        class="add-another-collection-widget"
+        data-list-selector="#categories-fields-list">Ajouter un tag</button>
+		
+		
+	<ul id="auteurs-fields-list"
+        data-prototype="{{ form_widget(form.auteurs.vars.prototype)|e }}"
+        data-widget-tags="{{ '<li></li>'|e }}"
+        data-widget-counter="{{ form.auteurs|length }}">
+    {% for auteur in form.auteurs %}
+        <li>
+            {{ form_errors(auteur) }}
+            {{ form_widget(auteur) }}
+        </li>
+    {% endfor %}
+    </ul>
+
+    <button type="button"
+        class="add-another-collection-widget"
+        data-list-selector="#auteurs-fields-list">Ajouter un co-auteur</button>
+
+    <a href="{{ path('article_index') }}">back to list</a>
+	{{ include('article/_form.html.twig') }}
+{{ form_end(form) }}
+{% endblock %}
